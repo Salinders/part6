@@ -1,13 +1,56 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Redux Anecdotes</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redux Anecdotes</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>
+<!-- import { useSelector, useDispatch } from 'react-redux'
+import { voteIncrement } from '../reducers/anecdoteReducer'
+
+const AnecdotesList = () => {
+const dispatch = useDispatch()
+const filters = useSelector(state => state.filter)
+const anecdotes = useSelector(state => {
+if (filters === null) {
+return state.anecdotes
+.sort((a, b) => b.votes - a.votes)
+}
+return state.anecdotes.filter((anecdote) =>
+anecdote.content
+.includes(filters.toLowerCase))
+.sort((a, b) => b.votes - a.votes)
+})
+
+
+const vote = (id) => {
+dispatch(voteIncrement(id))
+}
+
+return (
+<div>
+  {anecdotes.map(anecdote =>
+  <div key={anecdote.id}>
+    <div>
+      {anecdote.content}
+    </div>
+    <div>
+      has {anecdote.votes}
+      <button onClick={()=> vote(anecdote.id)}>vote</button>
+    </div>
+  </div>
+  )}
+</div>
+)
+}
+
+export default AnecdotesList -->
