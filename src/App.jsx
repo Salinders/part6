@@ -1,36 +1,21 @@
 import axios from 'axios'
 import { getAnecdotes, createAnecdote, updateAnecdotes } from './request'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import AnecdoteForm from './components/AnecdoteForm'
 
 const App = () => {
   const queryClient = useQueryClient()
-
-  const newAnecdoteMutation = useMutation({
-    mutationFn: createAnecdote,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['anecdotes'] })
-    }
-  })
-
-  const addAnecdote = async (event) => {
-    const genId = () => (Math.random() * 10000).toFixed(0)
-    event.preventDefault()
-    const content = event.target.anecdote.value
-    event.target.anecdote.value = ''
-    newAnecdoteMutation.mutate({ content, id: genId(), votes: 0 })
-  }
-
-  const updateAnecdoteVote = useMutation({
+  const updateVoteMutation = useMutation({
     mutationFn: updateAnecdotes,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['anecdotes'] })
+
     }
 
   })
 
-
   const handleVote = (anecdote) => {
-    updateAnecdoteVote.mutate({ ...anecdote, votes: anecdote.votes + 1 })
+    updateVoteMutation.mutate({ ...anecdote, votes: anecdote.votes + 1 })
     console.log('vote')
   }
 
@@ -57,10 +42,7 @@ const App = () => {
       <h1>Anecdote app</h1>
 
       <h3>create new</h3>
-      <form onSubmit={addAnecdote}>
-        <input name='anecdote' />
-        <button type="submit">create</button>
-      </form>
+      <AnecdoteForm />
       <br></br>
       {anecdotes.map(anecdote =>
         <div key={anecdote.id}>
